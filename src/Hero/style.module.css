@@ -1,0 +1,48 @@
+.container {
+  height: 70vh;
+  margin-top: 52px;
+  margin-inline: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.title {
+  color: #f1f1f1;
+  font-family: "Bahnschrift", sans-serif;
+  font-size: 65px;
+}
+.type {
+  color: #f1f1f1;
+}
+.description {
+  color: #f1f1f1;
+  max-width: 55vw;
+  max-height: 180px;
+  text-align: center;
+  overflow: hidden;
+  font-size: 14px;
+}
+.btnBox {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.btnBox a,
+.btnBox button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #f1f1f1;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.btnBox a:hover,
+.btnBox button:hover {
+  background: #ddd2d2;
+}
