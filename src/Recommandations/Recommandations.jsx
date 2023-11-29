@@ -1,17 +1,17 @@
 import { Movie } from "../Movie/Movie";
 import s from "./style.module.css";
 
-export function Recommandations(recommandationsList) {
-  const recommandations = recommandationsList.recommandationsList;
+export function Recommandations({ recommandationsList, onClickItem }) {
+  // const recommandations = recommandationsList.recommandationsList;
   return (
     <div className={s.filmContainer} key="contain ">
-      {Object.values(recommandations).map((movie) => {
+      {Object.values(recommandationsList).map((movie) => {
         return (
           <Movie
             className={s.item}
             key={movie.id}
             movie={movie}
-            onClick={() => console.log("bonjour")}
+            onClick={onClickItem}
           />
         );
       })}

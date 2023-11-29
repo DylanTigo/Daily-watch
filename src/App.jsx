@@ -22,7 +22,7 @@ function App() {
   async function fetchCurrentRecommendations(currentId) {
     const RecommandationsList = await Movies.fetchRecommendations(currentId);
     if (RecommandationsList.length > 0) {
-      setRecommendations(RecommandationsList.slice(0, 10));
+      setRecommendations(RecommandationsList.slice(0, 15));
     }
   }
   useEffect(() => {
@@ -37,7 +37,10 @@ function App() {
       <Hero currentMovie={currentMovie} />
       <h2>Vous pouriez egalement aimer</h2>
       {recommandations && recommandations.length > 0 && (
-        <Recommandations recommandationsList={recommandations} />
+        <Recommandations
+          recommandationsList={recommandations}
+          onClickItem={setCurrentMovie}
+        />
       )}
     </>
   );

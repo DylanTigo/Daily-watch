@@ -1,10 +1,9 @@
 import { PosterPathUrl } from "../api/config";
 import s from "./style.module.css";
 
-export function Movie({ movie }) {
-  console.log(movie);
+export function Movie({ movie, onClick }) {
   return (
-    <article>
+    <article onClick={() => onClick(movie)}>
       <img
         className={s.img}
         src={PosterPathUrl + movie.poster_path}

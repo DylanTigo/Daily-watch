@@ -9,7 +9,7 @@
 }
 .filmContainer::-webkit-scrollbar {
   background: transparent;
-  height: 10px;
+  height: 15px;
 }
 .filmContainer::-webkit-scrollbar-thumb:horizontal {
   border-radius: 20px;

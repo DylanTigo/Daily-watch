@@ -8,7 +8,7 @@ export function Hero({ currentMovie }) {
       className={s.container}
       style={{
         background: currentMovie
-          ? `linear-gradient(#22222255, #22222255),url(${BackdropBaseUrl}${currentMovie.backdrop_path}) no-repeat center / cover`
+          ? `linear-gradient(#22222266, #22222266),url(${BackdropBaseUrl}${currentMovie.backdrop_path}) no-repeat top / cover`
           : "#222",
       }}
     >
