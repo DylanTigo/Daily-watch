@@ -31,9 +31,16 @@ function App() {
     }
   }, [currentMovie]);
 
+  async function fetchSearch(keyword) {
+    const searchResult = await Movies.fetchSearch(keyword);
+    if (searchResult.length > 0) {
+      setCurrentMovie(searchResult[0]);
+    }
+  }
+
   return (
     <>
-      <Header />
+      <Header searchUpdate={fetchSearch} />
       <Hero currentMovie={currentMovie} />
       <h2>Vous pouriez egalement aimer</h2>
       {recommandations && recommandations.length > 0 && (

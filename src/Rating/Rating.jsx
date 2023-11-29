@@ -28,9 +28,12 @@ export function Rating({ rate }) {
   for (let i = 0; i < emptyStar(); i++) {
     starList.push(<FaRegStar key={"empty-star" + i} />);
   }
+  const note = Math.round(rate * 100) / 100;
+
   return (
     <div className={s.rating}>
-      {starList} {rate}
+      {starList}
+      {note}
     </div>
   );
 }

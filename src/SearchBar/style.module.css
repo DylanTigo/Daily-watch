@@ -18,7 +18,7 @@ input[type="search"] {
   border: none;
 }
 .inputContainer:focus-within {
-  outline: 1px solid #cfa6a6;
+  outline: 1px solid #dfdfdf;
 }
 
 .search {

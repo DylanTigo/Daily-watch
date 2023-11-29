@@ -19,7 +19,7 @@ export function Hero({ currentMovie }) {
       <p className={s.description}>{currentMovie && currentMovie.overview} </p>
       <Rating rate={currentMovie && currentMovie.vote_average / 2} />
       <div className={s.btnBox}>
-        <a href="">Bande d'annonce</a>
+        <a href="#">Bande d'annonce</a>
         <button type="button">❤</button>
       </div>
     </main>
