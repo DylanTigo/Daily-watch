@@ -1,11 +1,16 @@
-*, ::before, ::after{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    color: #222;
-    font-family: "Montserat", sans-serif;
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserat", sans-serif;
 }
-body{
-    width: 100%;
-    background: #ddd2d2;
+body {
+  width: 100%;
+  background: #ddd2d2;
+}
+h2 {
+  margin: 20px 10px 10px;
+  font-size: 30px;
 }

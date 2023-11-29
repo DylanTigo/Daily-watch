@@ -1,0 +1,38 @@
+article {
+  position: relative;
+  height: 278px;
+}
+article::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: #00000083;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+article:hover::after,
+article:hover .title {
+  opacity: 1;
+}
+.img {
+  width: 185px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 80%;
+  text-align: center;
+  font-weight: bold;
+  opacity: 0;
+  color: #ffffff;
+  transition: opacity 0.3s ease-out;
+  z-index: 10;
+}

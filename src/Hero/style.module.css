@@ -46,3 +46,11 @@
 .btnBox button:hover {
   background: #ddd2d2;
 }
+@media (max-width: 670px) {
+  .title {
+    font-size: 55px;
+  }
+  .description {
+    max-width: 80vw;
+  }
+}
