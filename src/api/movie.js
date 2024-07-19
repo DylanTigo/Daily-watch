@@ -15,9 +15,10 @@ export class Movies {
   }
   static async fetchSearch(keywork) {
     const response = await fetch(
-      `${BaseUrl}/search/multi${ApiKeyParam}&query=${keywork}`
+      `${BaseUrl}search/multi${ApiKeyParam}&query=${keywork}`
     );
     const datas = await response.json();
+    console.log(datas);
     return datas.results;
   }
 }

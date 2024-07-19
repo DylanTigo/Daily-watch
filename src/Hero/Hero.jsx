@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import s from "./style.module.css";
 import { Rating } from "../Rating/Rating";
 import { BackdropBaseUrl } from "../api/config";
