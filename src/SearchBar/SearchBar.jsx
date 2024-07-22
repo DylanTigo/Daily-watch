@@ -1,5 +1,4 @@
-import { FaSearch } from "react-icons/fa";
-import s from "./style.module.css";
+import { Search } from "lucide-react";
 
 export function SearchBar({ searchUpdate }) {
   let value;
@@ -18,19 +17,20 @@ export function SearchBar({ searchUpdate }) {
   }
 
   return (
-    <div className={s.inputContainer}>
+    <form onSubmit={() => updateSearch()} className="rounded-full bg-gray-50 flex items-center px-1">
       <input
         type="search"
         id="search"
         name="search"
+        className="pl-3 py-2 rounded-full bg-gray-50 flex items-center overflow-hidden outline-none w-36"
         autoComplete="off"
         placeholder="Rechercher une serie"
         onKeyUp={(e) => updateSearchByKey(e)}
         onChange={(e) => onChange(e)}
       />
-      <button className={s.search} onClick={() => updateSearch()}>
-        <FaSearch className={s.icon} />
+      <button type="submit" className="rounded-full hover:bg-gray-100 p-3">
+        <Search className="size-4 text-gray-800"/>
       </button>
-    </div>
+    </form>
   );
 }

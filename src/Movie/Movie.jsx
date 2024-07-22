@@ -1,15 +1,15 @@
 import { PosterPathUrl } from "../api/config";
-import s from "./style.module.css";
+// import { Rating } from "../Rating/Rating";
 
 export function Movie({ movie, onClick }) {
   return (
-    <article onClick={() => onClick(movie)}>
+    <article className="w-44 shrink-0" onClick={() => onClick(movie)}>
       <img
-        className={s.img}
+        className="object-cover w-full rounded-lg"
         src={PosterPathUrl + movie.poster_path}
         alt={movie.name}
       />
-      <p className={s.title}>{movie.name}</p>
+      <p className="line-clamp-1 font-bahnschrift font-bold px-1">{movie.name}</p>
     </article>
   );
 }

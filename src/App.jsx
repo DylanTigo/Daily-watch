@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Header } from "./Header/Header";
 import { Hero } from "./Hero/Hero";
 import { Movies } from "./api/movie";
-import { Recommandations } from "./Recommandations/Recommandations";
-import "./App.css";
+import { Recommandations } from "./Recommandations/Recommandations"
 
 function App() {
   const [currentMovie, setCurrentMovie] = useState();
@@ -42,7 +41,7 @@ function App() {
     <>
       <Header searchUpdate={fetchSearch} />
       <Hero currentMovie={currentMovie} />
-      <h2>Vous pouriez egalement aimer</h2>
+      <h2 className="text-4xl font-bold text-center mt-6 mb-4 font-bahnschrift">Vous pouriez egalement aimer</h2>
       {recommandations && recommandations.length > 0 && (
         <Recommandations
           recommandationsList={recommandations}

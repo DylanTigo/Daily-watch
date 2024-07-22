@@ -1,16 +1,14 @@
 import { Movie } from "../Movie/Movie";
-import s from "./style.module.css";
 
-export function Recommandations({ recommandationsList, onClickItem }) {
-  // const recommandations = recommandationsList.recommandationsList;
+export function Recommandations({ itemsList, onClickItem }) {
+  // const recommandations = itemsList.itemsList;
   return (
-    <div className={s.filmContainer} key="contain ">
-      {Object.values(recommandationsList).map((movie) => {
+    <div className="overflow-hidden flex gap-3 mb-10" key="contain ">
+      {Object.values(itemsList).map((item) => {
         return (
           <Movie
-            className={s.item}
-            key={movie.id}
-            movie={movie}
+            key={item.id}
+            movie={item}
             onClick={onClickItem}
           />
         );

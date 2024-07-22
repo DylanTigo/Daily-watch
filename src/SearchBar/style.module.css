@@ -6,17 +6,7 @@
   background: #eeeaea;
 }
 
-input::placeholder {
-  font-size: 14px;
-}
-input[type="search"] {
-  background: #eeeaea;
-  padding-block: 10px;
-  padding-left: 15px;
-  font-size: 13px;
-  outline: none;
-  border: none;
-}
+
 .inputContainer:focus-within {
   outline: 1px solid #dfdfdf;
 }

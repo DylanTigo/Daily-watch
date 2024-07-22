@@ -1,9 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'bahnschrift': ['Bahnschrift', 'sans-serif'],
+        'sans': ['PT Sans', 'sans-serif']
+      }
+    },
   },
   plugins: [],
 }
-

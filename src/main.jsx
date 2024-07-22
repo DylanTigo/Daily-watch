@@ -6,12 +6,14 @@ import NotFoundPage from "./Pages/NotFoundPage.jsx";
 import Films from "./Pages/Films.jsx";
 import Series from "./Pages/Series.jsx";
 import Details from "./Pages/Details.jsx";
-import Home from "./Pages/Home.jsx";
+// import Home from "./Pages/Home.jsx";
+import "./index.css"
+import App from "./App.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
   },
   {
     path: "/films",
