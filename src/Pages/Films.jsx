@@ -29,6 +29,56 @@ export default function Films() {
         <h2 className="text-2xl ml-10 mb-5 font-bold">Tendances</h2>
         <Recommandations itemsList={films} />
       </div>
+      <div className="grid grid-cols-4 grid-rows-6 gap-3 max-w-6xl mx-auto h-[70svh]">
+        <div className="col-span-2 row-span-4">
+          <img src={cover} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="col-span-2 row-span-2">
+          <img src={cover} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="col-span-2 row-span-2">
+          <img src={cover} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="col-span-3 row-span-2">
+          <img src={cover} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="col-span-1 row-span-2">
+          <img src={cover} alt="" className="w-full h-full object-cover" />
+        </div>
+      </div>
     </>
   );
 }
+
+const Item = (item, index) => {
+  let colSpan = 1;
+  let rowSpan = 1;
+
+  switch (index) {
+    case 0:
+      colSpan = 2;
+      rowSpan = 4;
+      break;
+    case 1:
+    case 2:
+      colSpan = 2;
+      rowSpan = 2;
+      break;
+    case 3:
+      colSpan = 3;
+      rowSpan = 2;
+      break;
+    default:
+      break;
+  }
+
+  return (
+    <div key={index} className={`col-span-${colSpan} row-span-${rowSpan}`}>
+      <img
+        src={image.url}
+        alt={image.alt}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+};
