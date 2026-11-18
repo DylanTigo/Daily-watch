@@ -14,6 +14,7 @@ import { useDocumentTitle } from "../lib/hooks";
 import {
   REGION,
   backdropSet,
+  densitySet,
   formatDate,
   formatRuntime,
   formatVote,
@@ -109,7 +110,15 @@ export default function Details({ type }) {
           <div className="hidden md:block">
             <div className="relative aspect-[2/3] overflow-hidden rounded-[6px] bg-night-3 shadow-[0_40px_80px_-30px_rgba(0,0,0,1)] ring-1 ring-inset ring-line">
               {d.poster_path ? (
-                <Img src={img(d.poster_path, "w500")} eager alt={`Affiche de ${item.title}`} className="h-full w-full object-cover" />
+                <Img
+                  src={img(d.poster_path, "w500")}
+                  srcSet={`${img(d.poster_path, "w342")} 342w, ${img(d.poster_path, "w500")} 500w, ${img(d.poster_path, "w780")} 780w`}
+                  sizes="(min-width: 1024px) 18rem, 15rem"
+                  width="500"
+                  height="750"
+                  alt={`Affiche de ${item.title}`}
+                  className="h-full w-full object-cover"
+                />
               ) : (
                 <PosterFallback title={item.title} />
               )}
@@ -197,7 +206,7 @@ export default function Details({ type }) {
               <li key={p.credit_id || p.id} className="w-28 shrink-0 snap-start md:w-32">
                 <div className="aspect-[4/5] overflow-hidden rounded-[5px] bg-night-3 ring-1 ring-inset ring-line">
                   {p.profile_path ? (
-                    <Img src={img(p.profile_path, "w185")} alt="" className="h-full w-full object-cover" />
+                    <Img src={img(p.profile_path, "w185")} width="185" height="278" alt="" className="h-full w-full object-cover" />
                   ) : (
                     <div className="grid h-full place-items-center font-display text-3xl font-extrabold text-mute">
                       {p.name?.[0]}
@@ -282,7 +291,7 @@ function WhereToWatch({ providers, title }) {
                       title={`${p.provider_name} — voir l'offre`}
                       className="group/p flex items-center gap-2.5 rounded-[5px] bg-night-3 py-1.5 pl-1.5 pr-3 ring-1 ring-inset ring-line transition-[background-color,transform] duration-150 hover:bg-night-4 active:scale-[0.97]"
                     >
-                      <img src={img(p.logo_path, "w92")} alt="" className="h-8 w-8 rounded-[4px]" loading="lazy" />
+                      <img {...densitySet(p.logo_path, "w45", "w92")} alt="" width="32" height="32" className="h-8 w-8 rounded-[4px]" loading="lazy" decoding="async" />
                       <span className="text-[0.85rem] font-medium text-fg">{p.provider_name}</span>
                     </a>
                   </li>
@@ -349,7 +358,17 @@ function Seasons({ show }) {
             {(season.data?.episodes || []).map((ep) => (
               <li key={ep.id} className="grid grid-cols-[7.5rem_minmax(0,1fr)] gap-4 py-4 sm:grid-cols-[12rem_minmax(0,1fr)] md:gap-6">
                 <div className="relative aspect-video overflow-hidden rounded-[4px] bg-night-3 ring-1 ring-inset ring-line">
-                  {ep.still_path && <Img src={img(ep.still_path, "w300")} alt="" className="h-full w-full object-cover" />}
+                  {ep.still_path && (
+                    <Img
+                      src={img(ep.still_path, "w300")}
+                      srcSet={`${img(ep.still_path, "w185")} 185w, ${img(ep.still_path, "w300")} 300w`}
+                      sizes="(min-width: 640px) 12rem, 7.5rem"
+                      width="300"
+                      height="169"
+                      alt=""
+                      className="h-full w-full object-cover"
+                    />
+                  )}
                   <span className="board absolute bottom-1.5 left-1.5 rounded-[2px] px-1.5 py-0.5 font-display text-sm font-extrabold leading-none tabular">
                     {ep.episode_number}
                   </span>

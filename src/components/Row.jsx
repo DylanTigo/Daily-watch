@@ -7,19 +7,28 @@ import { ErrorState } from "./States";
 import { reducedMotion } from "../lib/gsap";
 
 const ITEM_WIDTH = "w-[40vw] sm:w-[27vw] md:w-[176px] xl:w-[196px]";
+const ITEM_SIZES = "(min-width: 1280px) 196px, (min-width: 768px) 176px, (min-width: 640px) 27vw, 40vw";
 
 /** A horizontally scrolling shelf of posters. */
 export function Row({ title, items, href, isLoading, isError, onRetry, ranked = false, showType = false, children }) {
   const scroller = useRef(null);
   const [edges, setEdges] = useState({ start: true, end: false });
+  // Posters past this index stay unloaded until the shelf is scrolled near them:
+  // a 20-poster row only fetches what is on screen plus a little look-ahead.
+  const [loadCount, setLoadCount] = useState(8);
 
   const measure = useCallback(() => {
     const el = scroller.current;
     if (!el) return;
-    setEdges({
-      start: el.scrollLeft < 8,
-      end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8,
-    });
+    const start = el.scrollLeft < 8;
+    const end = el.scrollLeft + el.clientWidth >= el.scrollWidth - 8;
+    setEdges((prev) => (prev.start === start && prev.end === end ? prev : { start, end }));
+    const first = el.querySelector("[data-row-item]");
+    if (first) {
+      const step = first.offsetWidth + parseFloat(getComputedStyle(el).columnGap || "16");
+      const needed = Math.ceil((el.scrollLeft + el.clientWidth * 1.25) / step) + 1;
+      setLoadCount((c) => Math.max(c, needed));
+    }
   }, []);
 
   useEffect(() => {
@@ -93,15 +102,15 @@ export function Row({ title, items, href, isLoading, isError, onRetry, ranked = 
                 ))
               : items.map((item, i) =>
                   ranked ? (
-                    <div key={`${item.type}-${item.id}`} className="flex shrink-0 snap-start items-end">
+                    <div key={`${item.type}-${item.id}`} data-row-item className="flex shrink-0 snap-start items-end">
                       <RankTile n={i + 1} />
                       <div className={`${ITEM_WIDTH} -ml-3 shrink-0`}>
-                        <PosterCard item={item} showType={showType} />
+                        <PosterCard item={item} showType={showType} sizes={ITEM_SIZES} deferImage={i >= loadCount} />
                       </div>
                     </div>
                   ) : (
-                    <div key={`${item.type}-${item.id}`} className={`${ITEM_WIDTH} shrink-0 snap-start`}>
-                      <PosterCard item={item} showType={showType} />
+                    <div key={`${item.type}-${item.id}`} data-row-item className={`${ITEM_WIDTH} shrink-0 snap-start`}>
+                      <PosterCard item={item} showType={showType} sizes={ITEM_SIZES} deferImage={i >= loadCount} />
                     </div>
                   )
                 )}

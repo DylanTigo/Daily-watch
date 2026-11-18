@@ -5,7 +5,7 @@ import { Info, Pause, Play, Star } from "lucide-react";
 import { Board, BoardText } from "./Board";
 import { Img } from "./Img";
 import { WatchlistButton } from "./ListButtons";
-import { backdropSet, formatVote, hrefFor, img, typeLabel } from "../lib/tmdb";
+import { backdropSet, densitySet, formatVote, hrefFor, typeLabel } from "../lib/tmdb";
 import { gsap, useGSAP, reducedMotion } from "../lib/gsap";
 
 const SLIDE_SECONDS = 9;
@@ -23,6 +23,15 @@ export function Hero({ items, genres, trailer }) {
 
   useEffect(() => {
     setVisited((v) => (v.has(index) ? v : new Set(v).add(index)));
+  }, [index]);
+
+  // Fetch the next backdrop only once the current one has had time to arrive,
+  // so the two never compete for bandwidth on first paint.
+  const [preloadNext, setPreloadNext] = useState(false);
+  useEffect(() => {
+    setPreloadNext(false);
+    const t = setTimeout(() => setPreloadNext(true), 3000);
+    return () => clearTimeout(t);
   }, [index]);
 
   const next = useCallback(() => setIndex((i) => (i + 1) % items.length), [items.length]);
@@ -84,7 +93,7 @@ export function Hero({ items, genres, trailer }) {
           className={`absolute inset-0 -z-10 transition-opacity duration-[1100ms] ease-out ${i === index ? "opacity-100" : "opacity-0"}`}
         >
           {/* Only the current, already-seen and next slides load their backdrop. */}
-          {(visited.has(i) || i === (index + 1) % items.length) && (
+          {(visited.has(i) || (preloadNext && i === (index + 1) % items.length)) && (
             <Img
               {...backdropSet(item.backdrop)}
               eager={i === index}
@@ -162,7 +171,9 @@ export function Hero({ items, genres, trailer }) {
                       i === index ? "ring-board shadow-[0_10px_24px_-10px_rgba(242,237,227,0.45)]" : "ring-line"
                     }`}
                   >
-                    {item.poster && <img src={img(item.poster, "w154")} alt="" className="h-full w-full object-cover" />}
+                    {item.poster && (
+                      <img {...densitySet(item.poster, "w92", "w154")} alt="" width="64" height="96" decoding="async" className="h-full w-full object-cover" />
+                    )}
                   </div>
                   <span className="mt-2 block h-[2px] overflow-hidden rounded-full bg-fg/15">
                     {i === index && <span ref={progress} className="block h-full origin-left bg-marquee" />}

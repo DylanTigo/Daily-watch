@@ -13,17 +13,30 @@ export function PosterFallback({ title }) {
   );
 }
 
-export function PosterCard({ item, showType = false, actions, className = "", style }) {
+/** Rendered width of a poster in a grid (2 → 6 columns, page capped at 1440px). */
+export const GRID_SIZES = "(min-width: 1280px) 220px, (min-width: 1024px) 19vw, (min-width: 768px) 24vw, (min-width: 640px) 32vw, 48vw";
+
+/**
+ * @param sizes   rendered width hint so the browser picks w185 or w342
+ * @param deferImage  keep the poster unloaded (a row item scrolled far off-screen)
+ */
+export function PosterCard({ item, showType = false, actions, className = "", style, sizes = GRID_SIZES, deferImage = false }) {
   return (
     <article className={`group relative ${className}`} style={style} data-flip-id={`${item.type}-${item.id}`}>
       <Link to={hrefFor(item)} className="block rounded-[5px] outline-offset-4 active:scale-[0.98] transition-transform duration-150">
         <div className="poster-lift relative aspect-[2/3] overflow-hidden rounded-[5px] bg-night-3 ring-1 ring-inset ring-line">
           {item.poster ? (
-            <Img
-              src={img(item.poster, "w342")}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+            !deferImage && (
+              <Img
+                src={img(item.poster, "w342")}
+                srcSet={`${img(item.poster, "w185")} 185w, ${img(item.poster, "w342")} 342w`}
+                sizes={sizes}
+                width="342"
+                height="513"
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            )
           ) : (
             <PosterFallback title={item.title} />
           )}
