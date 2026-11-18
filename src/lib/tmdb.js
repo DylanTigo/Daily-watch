@@ -1,10 +1,22 @@
-/** Responsive backdrop: never ship the multi-megabyte original to a phone. */
+/**
+ * Responsive backdrop. Capped at w1280: backdrops sit under dark scrims, so the
+ * multi-megabyte "original" (up to 3840px) buys nothing visible.
+ */
 export function backdropSet(path) {
   if (!path) return {};
   return {
     src: `https://image.tmdb.org/t/p/w1280${path}`,
-    srcSet: `https://image.tmdb.org/t/p/w780${path} 780w, https://image.tmdb.org/t/p/w1280${path} 1280w, https://image.tmdb.org/t/p/original${path} 1920w`,
+    srcSet: `https://image.tmdb.org/t/p/w780${path} 780w, https://image.tmdb.org/t/p/w1280${path} 1280w`,
     sizes: "100vw",
+  };
+}
+
+/** Fixed-size TMDB image at 1x and 2x density (logos, small thumbnails). */
+export function densitySet(path, size1x, size2x) {
+  if (!path) return {};
+  return {
+    src: `https://image.tmdb.org/t/p/${size1x}${path}`,
+    srcSet: `https://image.tmdb.org/t/p/${size1x}${path} 1x, https://image.tmdb.org/t/p/${size2x}${path} 2x`,
   };
 }
 

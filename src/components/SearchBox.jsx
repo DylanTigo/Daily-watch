@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { Search, X } from "lucide-react";
 import { useDebounced } from "../lib/hooks";
-import { hrefFor, img, normalizeList, tmdb, typeLabel } from "../lib/tmdb";
+import { densitySet, hrefFor, normalizeList, tmdb, typeLabel } from "../lib/tmdb";
 
 /** Header search with live suggestions and full keyboard support. */
 export function SearchBox() {
@@ -149,7 +149,7 @@ export function SearchBox() {
                 }`}
               >
                 <div className="relative h-[60px] w-10 shrink-0 overflow-hidden rounded-[3px] bg-night-3">
-                  {item.poster && <img src={img(item.poster, "w92")} alt="" className="h-full w-full object-cover" />}
+                  {item.poster && <img {...densitySet(item.poster, "w45", "w92")} alt="" width="40" height="60" decoding="async" className="h-full w-full object-cover" />}
                 </div>
                 <div className="min-w-0">
                   <p className="truncate text-[0.92rem] font-medium text-fg">{item.title}</p>
