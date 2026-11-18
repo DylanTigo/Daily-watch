@@ -1,26 +1,20 @@
-import { useState, useEffect } from "react";
-import { Header } from "./Header/Header";
-import { Hero } from "./Hero/Hero";
-import { Movies } from "./api/movie";
-import { Recommandations } from "./Recommandations/Recommandations"
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
+import { Header } from "./components/Header";
+import { Footer, Toaster } from "./components/Chrome";
 
-function App() {
-  const [currentMovie, setCurrentMovie] = useState();
-
-  async function fetchSearch(keyword) {
-    const searchResult = await Movies.fetchSearch(keyword);
-    if (searchResult.length > 0) {
-      setCurrentMovie(searchResult[0]);
-    }
-  }
-
+export default function App() {
   return (
     <>
-      <Header searchUpdate={fetchSearch} />
-      <Outlet/>
+      <a href="#contenu" className="skip-link">
+        Aller au contenu
+      </a>
+      <Header />
+      <main id="contenu" className="min-h-[100svh]">
+        <Outlet />
+      </main>
+      <Footer />
+      <Toaster />
+      <ScrollRestoration getKey={(location) => location.pathname} />
     </>
   );
 }
-
-export default App;
